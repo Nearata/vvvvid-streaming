@@ -3,7 +3,7 @@
 // @namespace   https://github.com/Nearata/
 // @description Ti permette di guardare i video rimuovendo la pubblicità.
 // @author      Nearata
-// @version     1.0.1
+// @version     1.0.2
 // @license     https://choosealicense.com/licenses/mit/
 // @copyright   2019+, William Di Cicco (https://github.com/Nearata/)
 // @homepage    https://github.com/Nearata/vvvvid-streaming/
@@ -101,7 +101,7 @@ function fixUrl(url) {
           })
 
           $(".show-streaming-button").click((e) => {
-            versionTitle = e.currentTarget.title
+            let versionTitle = e.currentTarget.title
             let seasonId = e.currentTarget.dataset.seasonId
             $.get(`https://www.vvvvid.it/vvvvid/ondemand/${showId}/season/${seasonId}?conn_id=${connId}`, seasonResult => {
               numEpisodes = seasonResult["data"].length
