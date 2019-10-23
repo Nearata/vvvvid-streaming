@@ -4,9 +4,9 @@
 // @description Ti permette di guardare i video rimuovendo la pubblicità.
 // @author      Nearata
 // @version     1.0
-// @license     MIT; https://choosealicense.com/licenses/mit/
+// @license     https://choosealicense.com/licenses/mit/
 // @copyright   2019+, William Di Cicco (https://github.com/Nearata/)
-// @homepageURL https://github.com/Nearata/vvvvid-streaming/
+// @homepage    https://github.com/Nearata/vvvvid-streaming/
 // @supportURL  https://github.com/Nearata/vvvvid-streaming/issues
 // @match       *://www.vvvvid.it/*
 // @exclude     *://www.vvvvid.it/adblock.html
@@ -92,6 +92,7 @@ function fixUrl(url) {
                 showButtonsActionsElem.append($("<div />", {
                   "class":"button-35 show-streaming-button button-black-background button-shadow-small text-shadow",
                   "text":value["name"],
+                  "title":value["name"],
                   "style":"text-transform:uppercase;font-weight:700;color:hsl(225, 73%, 57%)",
                   "data-season-id":value["season_id"]
                 }))
@@ -100,10 +101,12 @@ function fixUrl(url) {
           })
 
           $(".show-streaming-button").click((e) => {
+            versionTitle = e.currentTarget.title
             let seasonId = e.currentTarget.dataset.seasonId
             $.get(`https://www.vvvvid.it/vvvvid/ondemand/${showId}/season/${seasonId}?conn_id=${connId}`, seasonResult => {
               numEpisodes = seasonResult["data"].length
               swal({
+                "title": versionTitle,
                 "text": `Seleziona un episodio da 1 a ${numEpisodes}. Es. 1`,
                 "content": "input",
                 "button": {
