@@ -49,6 +49,10 @@ Per mettere fullscreen, cliccate il tasto in altro a destra del player. Per usci
 
 ## Changelog
 
+- 1.0.3
+  - Se si possiede un account, gli episodi visti verranno salvati.
+- 1.0.2
+  - Alcuni fix
 - 1.0.1
   - Aggiunto il titolo della versione selezionata sul popup
 - 1.0
