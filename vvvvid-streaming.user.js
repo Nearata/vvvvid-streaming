@@ -4,9 +4,9 @@
 // @description Ti permette di guardare i video rimuovendo la pubblicità.
 // @author      Nearata
 // @version     1.0
-// @license     https://choosealicense.com/licenses/mit/
+// @license     MIT; https://choosealicense.com/licenses/mit/
 // @copyright   2019+, William Di Cicco (https://github.com/Nearata/)
-// @homepage    https://github.com/Nearata/vvvvid-streaming/
+// @homepageURL https://github.com/Nearata/vvvvid-streaming/
 // @supportURL  https://github.com/Nearata/vvvvid-streaming/issues
 // @match       *://www.vvvvid.it/*
 // @exclude     *://www.vvvvid.it/adblock.html
