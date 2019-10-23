@@ -3,7 +3,7 @@
 // @namespace   https://github.com/Nearata/
 // @description Ti permette di guardare i video rimuovendo la pubblicità.
 // @author      Nearata
-// @version     1.0.2
+// @version     1.0.3
 // @license     https://choosealicense.com/licenses/mit/
 // @copyright   2019+, William Di Cicco (https://github.com/Nearata/)
 // @homepage    https://github.com/Nearata/vvvvid-streaming/
@@ -73,7 +73,7 @@ function fixUrl(url) {
           sources: [
             {
               type: "application/x-mpegurl",
-              src: "http://vvvvid-vh.akamaihd.net/i/Dynit/PromisedNeverland/PromisedNeverland_S01Ep04_ufu9RSmTrcmBbcnvm.mp4/master.m3u8"
+              src: "https://vvvvid-vh.akamaihd.net/i/Dynit/PromisedNeverland/PromisedNeverland_S01Ep04_ufu9RSmTrcmBbcnvm.mp4/master.m3u8"
             }
           ]
         }
@@ -104,7 +104,7 @@ function fixUrl(url) {
             let versionTitle = e.currentTarget.title
             let seasonId = e.currentTarget.dataset.seasonId
             $.get(`https://www.vvvvid.it/vvvvid/ondemand/${showId}/season/${seasonId}?conn_id=${connId}`, seasonResult => {
-              numEpisodes = seasonResult["data"].length
+              let numEpisodes = seasonResult["data"].length
               swal({
                 "title": versionTitle,
                 "text": `Seleziona un episodio da 1 a ${numEpisodes}. Es. 1`,
@@ -125,6 +125,26 @@ function fixUrl(url) {
                       title: `${seasonResult["data"][ep-1]["show_title"]} - E${ep}`
                     }
                   ]
+                }, () => {
+                  let videoId = seasonResult["data"][ep-1]["video_id"]
+                  
+                  $.get(`https://www.vvvvid.it/vvvvid/video/${videoId}?conn_id=${connId}`, videoResult => {
+                    let ondemandType = videoResult["data"]["ondemand_type"]
+                    
+                    $.post(`https://www.vvvvid.it/vvvvid/video/${videoId}/event/start`, {
+                      "idVideo": videoId,
+                      "eventCode": "start",
+                      "ondemand_type": ondemandType,
+                      "conn_id": connId
+                    }).done(() => {
+                      $.post(`https://www.vvvvid.it/vvvvid/video/${videoId}/event/displayClick`, {
+                        "idVideo": videoId,
+                        "eventCode": "displayClick",
+                        "ondemand_type": ondemandType,
+                        "conn_id": connId
+                      })
+                    })
+                  })
                 })
                 
                 $("#streaming-modal").fadeIn()
