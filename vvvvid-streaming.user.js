@@ -114,7 +114,15 @@ function fixUrl(url) {
                   return swal("Episodio non trovato!")
                 }
                 
-                fpApi.load(fixUrl(window.$ds(seasonResult["data"][ep-1]["embed_info"])))
+                fpApi.load({
+                  sources: [
+                    {
+                      type: "application/x-mpegurl",
+                      src: fixUrl(window.$ds(seasonResult["data"][ep-1]["embed_info"])),
+                      title: `${seasonResult["data"][ep-1]["show_title"]} - E${ep}`
+                    }
+                  ]
+                })
                 
                 $("#streaming-modal").fadeIn()
                 $("#streaming-modal-close").click(() => $("#streaming-modal").fadeOut(() => fpApi.stop()))
