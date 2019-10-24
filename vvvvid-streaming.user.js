@@ -3,7 +3,7 @@
 // @namespace   https://github.com/Nearata/
 // @description Ti permette di guardare i video rimuovendo la pubblicità.
 // @author      Nearata
-// @version     1.0.4
+// @version     1.0.5
 // @license     MIT; https://choosealicense.com/licenses/mit/
 // @copyright   2019+, William Di Cicco (https://github.com/Nearata/)
 // @homepage    https://github.com/Nearata/vvvvid-streaming/
@@ -93,8 +93,16 @@ function fixUrl(url) {
                   "class":"button-35 show-streaming-button button-black-background button-shadow-small text-shadow",
                   "text":value["name"],
                   "title":value["name"],
-                  "style":"text-transform:uppercase;font-weight:700;color:hsl(225, 73%, 57%)",
                   "data-season-id":value["season_id"]
+                }).css({
+                  "text-transform": "uppercase",
+                  "font-weight": "700",
+                  "color": "hsl(225, 73%, 57%)",
+                  "overflow": "hidden",
+                  "white-space": "nowrap",
+                  "text-overflow": "ellipsis",
+                  "box-sizing": "border-box",
+                  "padding": "0 8px"
                 }))
               }
             }
