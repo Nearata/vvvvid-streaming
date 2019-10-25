@@ -1,8 +1,8 @@
 # VVVVID Streaming
 
-> Ti permette di guardare i video su VVVVID.it senza pubblicità.
+> Ti permette di guardare i video su VVVVID.it, rimuovendo la pubblicità, con un player personalizzato.
 
-![Esempio 1](Screenshots/Screenshot_1.png)
+![Esempio player](Screenshots/Screenshot_1.png)
 
 ## Installazione
 
