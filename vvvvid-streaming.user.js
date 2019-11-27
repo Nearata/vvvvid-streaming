@@ -83,7 +83,7 @@ function fixUrl(url) {
 
       $.get("https://www.vvvvid.it/user/login", loginResult => {
         let connId = loginResult["data"]["conn_id"]
-        let showId = currentLocation.match(/\d+/g).map(Number);
+        let showId = currentLocation.match(/\d+/g).map(Number)[0];
         
         $.get(`https://www.vvvvid.it/vvvvid/ondemand/${showId}/seasons/?conn_id=${connId}`, seasonsResult => {
           $.each(seasonsResult["data"], (index, value) => {
