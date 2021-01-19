@@ -129,7 +129,7 @@ function fixUrl(url) {
                   sources: [
                     {
                       type: "application/x-mpegurl",
-                      src: fixUrl(window.$ds(seasonResult["data"][ep-1]["embed_info"])),
+                      src: fixUrl(window.$ds(seasonResult["data"][ep-1]["embed_info"])).replace("http:", "https:"),
                       title: `${seasonResult["data"][ep-1]["show_title"]} - E${ep}`
                     }
                   ]
