@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name        VVVVID Streaming
 // @namespace   https://github.com/Nearata/
-// @description Ti permette di guardare i video rimuovendo la pubblicità.
+// @description Utilizza un player esterno per bypassare la pubblicità su VVVVID.
 // @author      Nearata
-// @version     1.0.6
+// @version     1.0.9
 // @license     MIT; https://choosealicense.com/licenses/mit/
 // @copyright   2019+, William Di Cicco (https://github.com/Nearata/)
 // @homepage    https://github.com/Nearata/vvvvid-streaming/
@@ -16,31 +16,35 @@
 // @grant       none
 // ==/UserScript==
 
-let currentLocation = window.location.href
-let fpCSSAdded = false
+let currentLocation = window.location.href;
+let fpCSSAdded = false;
 
 function fixUrl(url) {
-  return url.replace("http://vvvvid-vh.akamaihd.net/z", "http://vvvvid-vh.akamaihd.net/i").replace("/manifest.f4m", "/master.m3u8")
+  return url.replace("http://vvvvid-vh.akamaihd.net/z", "http://vvvvid-vh.akamaihd.net/i").replace("/manifest.f4m", "/master.m3u8");
 }
 
 (() => {
   setInterval(() => {
-    if (window.location.href !== currentLocation) {
-      currentLocation = window.location.href
+    if ($("div.show-title").length && window.location.href !== currentLocation || (window.location.href === currentLocation && $(".show-streaming-button").length == 0)) {
+      currentLocation = window.location.href;
       
       if (!fpCSSAdded) {
         let fpCSS = $("<link />", {
           "rel": "stylesheet",
           "href": "https://cdnjs.cloudflare.com/ajax/libs/flowplayer/7.2.7/skin/skin.min.css"
-        })
-        fpCSS.appendTo("head")
-        fpCSSAdded = true
+        });
+
+        fpCSS.appendTo("head");
+        fpCSSAdded = true;
       }
       
-      $("#streaming-modal").remove()
+      $(".show-streaming-button").remove();
+      $("#streaming-modal").remove();
+      
       let streamingElem = $("<div />", {
           "id": "streaming-modal"
-      })
+      });
+
       streamingElem.css({
         "z-index": "10000",
         "position": "fixed",
@@ -51,20 +55,20 @@ function fixUrl(url) {
         "padding": "14px",
         "width": "480px",
         "display": "none"
-      })
-      streamingElem.prependTo("body")
+      });
+      streamingElem.prependTo("body");
       
-      let closeStreamingElem = $("<div />", {"id":"streaming-modal-close", "text":"x"})
+      let closeStreamingElem = $("<div />", {"id":"streaming-modal-close", "text":"x"});
       closeStreamingElem.css({
         "cursor": "pointer",
         "font-size": "32px",
         "text-align": "center",
         "margin-bottom": "12px"
-      })
-      closeStreamingElem.appendTo(streamingElem)
+      });
+      closeStreamingElem.appendTo(streamingElem);
       
-      let videoElem = $("<div />", {"id":"video-player-fp"})
-      videoElem.appendTo(streamingElem)
+      let videoElem = $("<div />", {"id":"video-player-fp"});
+      videoElem.appendTo(streamingElem);
       
       let fpApi = flowplayer("#video-player-fp", {
         aspectRatio: "16:9",
@@ -79,11 +83,11 @@ function fixUrl(url) {
         }
       });
       
-      let showButtonsActionsElem = $(".show-buttons-actions")
+      let showButtonsActionsElem = $(".show-buttons-actions");
 
       $.get("https://www.vvvvid.it/user/login", loginResult => {
-        let connId = loginResult["data"]["conn_id"]
-        let showId = currentLocation.match(/\d+/g).map(Number)[0];
+        let connId = loginResult["data"]["conn_id"];
+        let showId = currentLocation.match(/\d+/g).map(Number);
         
         $.get(`https://www.vvvvid.it/vvvvid/ondemand/${showId}/seasons/?conn_id=${connId}`, seasonsResult => {
           $.each(seasonsResult["data"], (index, value) => {
@@ -103,16 +107,16 @@ function fixUrl(url) {
                   "text-overflow": "ellipsis",
                   "box-sizing": "border-box",
                   "padding": "0 8px"
-                }))
+                }));
               }
             }
           })
 
           $(".show-streaming-button").click((e) => {
-            let versionTitle = e.currentTarget.title
-            let seasonId = e.currentTarget.dataset.seasonId
+            let versionTitle = e.currentTarget.title;
+            let seasonId = e.currentTarget.dataset.seasonId;
             $.get(`https://www.vvvvid.it/vvvvid/ondemand/${showId}/season/${seasonId}?conn_id=${connId}`, seasonResult => {
-              let numEpisodes = seasonResult["data"].length
+              let numEpisodes = seasonResult["data"].length;
               swal({
                 "title": versionTitle,
                 "text": `Seleziona un episodio da 1 a ${numEpisodes}. Es. 1`,
@@ -121,8 +125,12 @@ function fixUrl(url) {
                   "text": "Play",
                 }
               }).then(ep => {
+                if (isNaN(ep)) {
+                  return swal("Deve essere un numero!");
+                }
+                
                 if (ep < 1 || ep > numEpisodes) {
-                  return swal("Episodio non trovato!")
+                  return swal("Episodio non trovato!");
                 }
                 
                 fpApi.load({
@@ -134,10 +142,10 @@ function fixUrl(url) {
                     }
                   ]
                 }, () => {
-                  let videoId = seasonResult["data"][ep-1]["video_id"]
+                  let videoId = seasonResult["data"][ep-1]["video_id"];
                   
                   $.get(`https://www.vvvvid.it/vvvvid/video/${videoId}?conn_id=${connId}`, videoResult => {
-                    let ondemandType = videoResult["data"]["ondemand_type"]
+                    let ondemandType = videoResult["data"]["ondemand_type"];
                     
                     $.post(`https://www.vvvvid.it/vvvvid/video/${videoId}/event/start`, {
                       "idVideo": videoId,
@@ -150,18 +158,18 @@ function fixUrl(url) {
                         "eventCode": "displayClick",
                         "ondemand_type": ondemandType,
                         "conn_id": connId
-                      })
-                    })
-                  })
-                })
+                      });
+                    });
+                  });
+                });
                 
-                $("#streaming-modal").fadeIn()
-                $("#streaming-modal-close").click(() => $("#streaming-modal").fadeOut(() => fpApi.stop()))
-              })
-            })
-          })
-        })
-      })
+                $("#streaming-modal").fadeIn();
+                $("#streaming-modal-close").click(() => $("#streaming-modal").fadeOut(() => fpApi.stop()));
+              });
+            });
+          });
+        });
+      });
     }
-  }, 1000)
+  }, 1000);
 })()
