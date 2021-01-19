@@ -29,7 +29,7 @@ Clicca uno dei bottoni e segui le istruzioni a schermo.
 - F: Attiva / Disattiva fullscreen
 - Freccia su o K: Alza volume
 - Freccia giù o J: Abbassa volume
-- Freccia sinistra o H: Torna indietro
+- Freccia sinistra o H: Vai indietro
 - Freccia destra o L: Vai avanti
 
 Per maggiori informazioni, visita [https://flowplayer.com/developers/plugins/keyboard](https://flowplayer.com/developers/plugins/keyboard)
