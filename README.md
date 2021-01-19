@@ -19,7 +19,7 @@ Esempio:
 
 ![Esempio 1](Screenshots/Screenshot_2.png)
 
-Clicca uno dei tasti e segui le istruzioni a schermo.
+Clicca uno dei bottoni e segui le istruzioni a schermo.
 
 ## Scorciatoie del Player
 
