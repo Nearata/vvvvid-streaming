@@ -1,67 +1,39 @@
 # VVVVID Streaming
 
-> Ti permette di guardare i video su VVVVID.it, rimuovendo la pubblicità, con un player personalizzato.
+> Utilizza un player esterno per bypassare la pubblicità su VVVVID
 
 ![Esempio player](Screenshots/Screenshot_1.png)
 
 ## Installazione
 
-Step 1: Gestore di script utente
+**Attenzione**: Per utilizzare questo script, hai bisogno di un gestore di script utente (alcuni esempi sono `Violentmoneky` o `Tampermonkey`).
 
-- Chrome: [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) o [Violentmonkey](https://chrome.google.com/webstore/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
+- [Greasefork](https://greasyfork.org/en/scripts/391506-vvvvid-streaming) - segui le istruzioni presenti sul sito.
+- [GitHub](https://github.com/Nearata/vvvvid-streaming/raw/master/vvvvid-streaming.user.js) - ti verrà chiesto di confermare l'installazione.
 
-- Firefox: [Greasemonkey](https://addons.mozilla.org/en-GB/firefox/addon/greasemonkey/), [Tampermonkey](https://addons.mozilla.org/en-GB/firefox/addon/tampermonkey/) o [Violentmonkey](https://addons.mozilla.org/en-GB/firefox/addon/violentmonkey/)
+## Come funziona
 
-- Safari: [Tampermonkey](https://www.tampermonkey.net/?browser=safari)
+All'apertura della pagina di un anime, vi compariranno dei bottoni "extra".
 
-- Microsoft Edge: [Tampermonkey](https://www.microsoft.com/it-it/p/tampermonkey/9nblggh5162s?rtc=1&activetab=pivot:overviewtab)
+Esempio:
 
-- Opera: [Tampermonkey](https://addons.opera.com/en-gb/extensions/details/tampermonkey-beta/) o [Violentmonkey](https://addons.opera.com/extensions/details/violent-monkey/)
+![Esempio 1](Screenshots/Screenshot_2.png)
 
-- Maxthon: [Violentmonkey](http://extension.maxthon.com/detail/index.php?view_id=1680)
+Clicca uno dei tasti e segui le istruzioni a schermo.
 
-- Dolphin: [Tampermonkey](https://play.google.com/store/apps/details?id=net.tampermonkey.dolphin)
+## Scorciatoie del Player
 
-- UC: [Tampermonkey](https://play.google.com/store/apps/details?id=net.tampermonkey.uc)
+- ESC: Esci dal fullscreen o chiudi un menu selezionato
+- Barra spaziatrice: Play / Pausa
+- M: Muta / Smuta
+- F: Attiva / Disattiva fullscreen
+- Freccia su o K: Alza volume
+- Freccia giù o J: Abbassa volume
+- Freccia sinistra o H: Torna indietro
+- Freccia destra o L: Vai avanti
 
-Step 2: Installa Script utente
+Per maggiori informazioni, visita [https://flowplayer.com/developers/plugins/keyboard](https://flowplayer.com/developers/plugins/keyboard)
 
-- [Greasefork](https://greasyfork.org/en/scripts/391506-vvvvid-streaming)
-- [Github](https://github.com/Nearata/vvvvid-streaming/raw/master/vvvvid-streaming.user.js)
+## License
 
-## Esempio di utilizzo
-
-Prenderò come esempio L'Attacco dei Giganti - Terza stagione
-
-Dopo aver aperto la pagina, e una volta finito il caricamento, vi si creeranno due bottoni sotto la trama:
-
-![Versioni](Screenshots/Screenshot_2.png)
-
-Una volta scelto e cliccato il bottone, vi si aprirà un popup:
-
-![Scelta episodio](Screenshots/Screenshot_3.png)
-
-Una volta scelto l'episodio e premuto INVIO o cliccando su play, vi si aprirà il player:
-
-![Player](Screenshots/Screenshot_4.png)
-
-Per mettere fullscreen, cliccate il tasto in altro a destra del player. Per uscire dal fullscreen premete ESC.
-
-## Changelog
-
-- 1.0.5
-  - Aggiornato il codice CSS del bottone dove in alcuni casi il testo, essendo troppo lungo, fuoriusciva dai bordi.
-- 1.0.4
-  - Aggiustato un errore che non mostrava il bottone di serie con meno di 2 episodi o film.
-- 1.0.3
-  - Se si possiede un account, gli episodi visti verranno salvati.
-- 1.0.2
-  - Alcuni fix
-- 1.0.1
-  - Aggiunto il titolo della versione selezionata sul popup
-- 1.0
-  - Primo rilascio
-
-## Meta
-
-Distribuito sotto la licenza MIT. Vedi ``LICENSE`` per maggiori informazioni.
+Distribuito sotto la licenza MIT. Vedi `LICENSE` per maggiori informazioni.
